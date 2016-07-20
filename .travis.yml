@@ -3,11 +3,24 @@ language: generic
 sudo: false
 matrix:
   include:
+      #     1.28s  apt-add-repository
+      #     5.76s  apt-get update
+      #     23.08s apt-get install
       - env: TYPE=hvr-ghc
         addons: {apt: {packages: [ ghc-7.10.3-dyn, ghc-7.10.3-prof ], sources: [ hvr-ghc ]}}
+
+      #     4.97s   apt-get update
+      #     6.25s   apt-get install
+      #     0.36s   wget
+      #     10.93s  tar xf
+      #     2.30s   configure
+      #     11.56s  make install
       - env: TYPE=download-xz
         addons: {apt: {packages: [ libgmp-dev, libgmpxx4ldbl ]}}
+
       - env: TYPE=download-bz2
+        addons: {apt: {packages: [ libgmp-dev, libgmpxx4ldbl ]}}
+
 before_install: true
 install:
  - VERSION="7.10.3"
