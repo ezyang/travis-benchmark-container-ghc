@@ -1,0 +1,29 @@
+language: generic
+# See https://blog.travis-ci.com/announcing_support_for_haskell_on_travis_ci/
+sudo: false
+matrix:
+  include:
+      - env: TYPE=hvr-ghc
+        addons: {apt: {packages: [ ghc-7.10.3 ], sources: [ hvr-ghc ]}}
+      - env: TYPE=download-xz
+      - env: TYPE=download-bz2
+before_install: true
+install:
+ - VERSION="7.10.3"
+ - PATCHFIX="b"
+ - if [[ "$TYPE" = "download-xz" ]]; then SUFFIX="xz"; fi
+ - if [[ "$TYPE" = "download-bz2" ]]; then SUFFIX="bz2"; fi
+ - BASENAME="ghc-$VERSION$PATCHFIX-x86_64-deb7-linux.tar.$SUFFIX"
+ - URL="http://downloads.haskell.org/~ghc/$VERSION$PATCHFIX/$BASENAME"
+ - if [[ ! -z "$SUFFIX" ]]; then wget "$URL"; fi
+ - if [[ ! -z "$SUFFIX" ]]; then tar xf "$BASENAME"; fi
+ - if [[ ! -z "$SUFFIX" ]]; then cd "ghc-$VERSION"; fi
+ - if [[ ! -z "$SUFFIX" ]]; then ./configure --prefix="$HOME/usr"; fi
+ - if [[ ! -z "$SUFFIX" ]]; then make install; fi
+ - if [[ ! -z "$SUFFIX" ]]; then export PATH="$HOME/usr/bin:$PATH"; fi
+before_script: true
+script:
+ - ghc --version
+ - echo "main = return ()" > Main.hs
+ - ghc --make Main.hs
+ - ghc --make Main.hs -prof
