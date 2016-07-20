@@ -13,6 +13,7 @@ matrix:
       - env: TYPE=hvr-ghc
         addons: {apt: {packages: [ ghc-7.10.3-dyn, ghc-7.10.3-prof ], sources: [ hvr-ghc ]}}
 
+      # fresh:
       #     4.97s   apt-get update
       #     6.25s   apt-get install
       #     0.36s   wget
@@ -20,12 +21,19 @@ matrix:
       #     2.30s   configure
       #     11.56s  make install
       #     WALL TIME: 1 min 2 sec
+      #
+      # from cache:
+      #     2.39    download archive
+      #     9.83    add to cache
+      #     2.59    cache determined to be unchanged
+      #     WALL TIME: 49 sec
       - env: TYPE=download-xz
         addons: {apt: {packages: [ libgmp-dev, libgmpxx4ldbl ]}}
         cache:
             directories:
                 - $HOME/usr
 
+      # fresh:
       #     4.92s   apt-get update
       #     6.10s   apt-get install
       #     0.70s   wget
@@ -33,6 +41,12 @@ matrix:
       #     1.78    configure
       #     13.45s  make install
       #     WALL TIME: 1 min 16 sec
+      #
+      # from cache:
+      #     3.11s   download archive
+      #     12.16s  add to cache
+      #     3.13s   cache determined to be unchanged
+      #     WALL TIME: 1 min 4 sec
       - env: TYPE=download-bz2
         addons: {apt: {packages: [ libgmp-dev, libgmpxx4ldbl ]}}
         cache:
