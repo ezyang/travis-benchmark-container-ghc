@@ -12,6 +12,7 @@ matrix:
       # not correctly whitelisted.
       - env: TYPE=hvr-ghc
         addons: {apt: {packages: [ ghc-7.10.3-dyn, ghc-7.10.3-prof ], sources: [ hvr-ghc ]}}
+        sudo: required
 
       # fresh:
       #     4.97s   apt-get update
@@ -51,7 +52,6 @@ matrix:
                 - $HOME/usr
 
 before_install: true
-cache:
 install:
  - VERSION="7.10.3"
  - PATCHFIX="b"
