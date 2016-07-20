@@ -44,8 +44,8 @@ cache:
 install:
  - VERSION="7.10.3"
  - PATCHFIX="b"
- - if [[ "$TYPE" = "download-xz" ]]; then SUFFIX="xz"; fi
- - if [[ "$TYPE" = "download-bz2" ]]; then SUFFIX="bz2"; fi
+ - if [[ "$TYPE" = "download-xz" ]] && [ ! -e $HOME/usr/bin/ghc-$VERSION ]; then SUFFIX="xz"; fi
+ - if [[ "$TYPE" = "download-bz2" ]] && [ ! -e $HOME/usr/bin/ghc-$VERSION ]; then SUFFIX="bz2"; fi
  - BASENAME="ghc-$VERSION$PATCHFIX-x86_64-deb7-linux.tar.$SUFFIX"
  - URL="http://downloads.haskell.org/~ghc/$VERSION/$BASENAME"
  - if [[ ! -z "$SUFFIX" ]]; then wget "$URL"; fi
