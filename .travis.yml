@@ -6,7 +6,7 @@ matrix:
       - env: TYPE=hvr-ghc
         addons: {apt: {packages: [ ghc-7.10.3-dyn, ghc-7.10.3-prof ], sources: [ hvr-ghc ]}}
       - env: TYPE=download-xz
-        addons: {apt: {packages: [ libgmpxx4ldbl ]}}
+        addons: {apt: {packages: [ libgmp-dev, libgmpxx4ldbl ]}}
       - env: TYPE=download-bz2
 before_install: true
 install:
