@@ -21,6 +21,7 @@ install:
  - if [[ ! -z "$SUFFIX" ]]; then ./configure --prefix="$HOME/usr"; fi
  - if [[ ! -z "$SUFFIX" ]]; then make install; fi
  - if [[ ! -z "$SUFFIX" ]]; then export PATH="$HOME/usr/bin:$PATH"; fi
+ - if [[ "$TYPE" = "hvr-ghc" ]]; then export PATH="/opt/ghc/$VERSION/bin:$PATH"; fi
 before_script: true
 script:
  - ghc --version
