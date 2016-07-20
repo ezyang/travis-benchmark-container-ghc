@@ -14,7 +14,7 @@ install:
  - if [[ "$TYPE" = "download-xz" ]]; then SUFFIX="xz"; fi
  - if [[ "$TYPE" = "download-bz2" ]]; then SUFFIX="bz2"; fi
  - BASENAME="ghc-$VERSION$PATCHFIX-x86_64-deb7-linux.tar.$SUFFIX"
- - URL="http://downloads.haskell.org/~ghc/$VERSION$PATCHFIX/$BASENAME"
+ - URL="http://downloads.haskell.org/~ghc/$VERSION/$BASENAME"
  - if [[ ! -z "$SUFFIX" ]]; then wget "$URL"; fi
  - if [[ ! -z "$SUFFIX" ]]; then tar xf "$BASENAME"; fi
  - if [[ ! -z "$SUFFIX" ]]; then cd "ghc-$VERSION"; fi
