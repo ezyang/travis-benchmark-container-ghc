@@ -1,11 +1,14 @@
 language: generic
-# See https://blog.travis-ci.com/announcing_support_for_haskell_on_travis_ci/
 sudo: false
 matrix:
   include:
       #     1.28s  apt-add-repository
       #     5.76s  apt-get update
       #     23.08s apt-get install
+      #     WALL TIME: 1 min 9 sec
+      #
+      # NB: For ghc 7.8 and earlier, the -dyn and -prof libraries are
+      # not correctly whitelisted.
       - env: TYPE=hvr-ghc
         addons: {apt: {packages: [ ghc-7.10.3-dyn, ghc-7.10.3-prof ], sources: [ hvr-ghc ]}}
 
@@ -15,13 +18,28 @@ matrix:
       #     10.93s  tar xf
       #     2.30s   configure
       #     11.56s  make install
+      #     WALL TIME: 1 min 2 sec
       - env: TYPE=download-xz
         addons: {apt: {packages: [ libgmp-dev, libgmpxx4ldbl ]}}
+        cache:
+            directories:
+                - $HOME/usr
 
+      #     4.92s   apt-get update
+      #     6.10s   apt-get install
+      #     0.70s   wget
+      #     25.96s  tar xf
+      #     1.78    configure
+      #     13.45s  make install
+      #     WALL TIME: 1 min 16 sec
       - env: TYPE=download-bz2
         addons: {apt: {packages: [ libgmp-dev, libgmpxx4ldbl ]}}
+        cache:
+            directories:
+                - $HOME/usr
 
 before_install: true
+cache:
 install:
  - VERSION="7.10.3"
  - PATCHFIX="b"
