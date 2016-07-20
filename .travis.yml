@@ -43,10 +43,7 @@ matrix:
       #     WALL TIME: 1 min 16 sec
       #
       # from cache:
-      #     3.11s   download archive
-      #     12.16s  add to cache
-      #     3.13s   cache determined to be unchanged
-      #     WALL TIME: 1 min 4 sec
+      #     same as above
       - env: TYPE=download-bz2
         addons: {apt: {packages: [ libgmp-dev, libgmpxx4ldbl ]}}
         cache:
